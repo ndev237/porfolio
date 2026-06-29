@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}À propos — Ndawa Mohammed{% endblock %}
+{% block term_file %}about.md{% endblock %}
+
+{% block content %}
+<section>
+    <div class="shell">
+
+        <div class="sec-head reveal">
+            <div class="sec-marker"><span class="num">01</span> / 03 — biographie</div>
+            <h2 class="sec-title">À propos de <em>moi</em></h2>
+            <p class="sec-sub" data-i18n="about.subtitle">
+                Développeur Python &amp; ODOO basé à Douala, Cameroun.
+            </p>
+        </div>
+
+        <div class="hero-grid" style="align-items:start">
+
+            {# -------- Identity card (sticky) -------- #}
+            <div class="reveal">
+                <div class="id-card" style="position: sticky; top: 110px">
+                    <div class="id-card-head">
+                        <span class="file">identity.json</span>
+                        <span class="status">[ READ ]</span>
+                    </div>
+                    <div class="id-card-body">
+                        <span class="id-key">// full_name</span>
+                        <div class="id-value">Ndawa Mohammed</div>
+
+                        <span class="id-key">// title</span>
+                        <div class="id-value mono">python &amp; odoo developer</div>
+
+                        <span class="id-key">// location</span>
+                        <div class="id-value">
+                            <i class="fas fa-map-marker-alt" style="color:var(--phosphor);font-size:0.85em;margin-right:0.4em"></i>
+                            BP Cité — Carrefour Maquereau<br>Douala, Cameroun
+                        </div>
+
+                        <span class="id-key">// phone</span>
+                        <div class="id-value mono">+237 697 579 270</div>
+
+                        <span class="id-key">// email</span>
+                        <div class="id-value mono"><a href="mailto:ecladorvynil507@gmail.com" style="color:var(--phosphor)">ecladorvynil507@gmail.com</a></div>
+
+                        <div class="ascii-rule" style="margin:1.5rem 0">─── languages ───</div>
+
+                        <div class="skill" style="padding:0.5rem 0; border:none">
+                            <div class="skill-head"><span class="name">français</span><span class="level">85%</span></div>
+                            <div class="bar"><div class="bar-fill" data-width="85"></div></div>
+                        </div>
+                        <div class="skill" style="padding:0.5rem 0; border:none">
+                            <div class="skill-head"><span class="name">english</span><span class="level">45%</span></div>
+                            <div class="bar"><div class="bar-fill" data-width="45"></div></div>
+                        </div>
+
+                        <div class="ascii-rule" style="margin:1.5rem 0">─── interests ───</div>
+
+                        <div class="tags">
+                            <span class="tag">sport</span>
+                            <span class="tag">musique</span>
+                            <span class="tag">natation</span>
+                            <span class="tag">voyage</span>
+                        </div>
+
+                        <div class="ascii-rule" style="margin:1.5rem 0">─── qualities ───</div>
+
+                        <div class="tags">
+                            <span class="tag">dynamique</span>
+                            <span class="tag">rigoureux</span>
+                            <span class="tag">ambitieux</span>
+                            <span class="tag">solidaire</span>
+                            <span class="tag">ponctuel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# -------- Bio + skills -------- #}
+            <div style="display:flex;flex-direction:column;gap:2rem">
+
+                <div class="card reveal">
+                    <div class="card-head">
+                        <span><span class="num">/</span> profil.md</span>
+                        <span class="badge">README</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">// profil</h3>
+                        <p class="card-desc" data-i18n="about.bio" style="color:var(--bone-dim); line-height:1.75; font-size:var(--t-base)">
+                            <strong style="color:var(--bone)">Je construis des outils Python qui résolvent de vrais problèmes&nbsp;:</strong>
+                            modules ODOO sur mesure, applications web Django, logiciels desktop.
+                            Trois ans à livrer du code pour des entreprises camerounaises — pas d'effets de mode,
+                            juste du logiciel qui tient en production.
+                        </p>
+                    </div>
+                </div>
+
+                {% if skills %}
+                <div class="card reveal">
+                    <div class="card-head">
+                        <span><span class="num">/</span> stack.tech</span>
+                        <span class="badge">{{ skills|length }} items</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title" style="margin-bottom:1.5rem" data-i18n="skills.title">// compétences techniques</h3>
+
+                        {% regroup skills by category as skill_groups %}
+                        {% for group in skill_groups %}
+                        <div style="margin-bottom:2rem">
+                            <div class="skill-cat-head" style="border-bottom:1px dashed var(--rule); margin-bottom:0.5rem; padding-left:0; padding-right:0">
+                                <span>
+                                    {% if group.grouper == 'frontend' %}# frontend
+                                    {% elif group.grouper == 'backend' %}# backend
+                                    {% elif group.grouper == 'devops' %}# devops
+                                    {% elif group.grouper == 'tools' %}# tools
+                                    {% else %}# other
+                                    {% endif %}
+                                </span>
+                                <span class="count">{{ group.list|length }}</span>
+                            </div>
+                            {% for skill in group.list %}
+                            <div class="skill">
+                                <div class="skill-head">
+                                    <span class="name"><i class="{{ skill.icon }}"></i>{{ skill.name }}</span>
+                                    <span class="level">{{ skill.level }}%</span>
+                                </div>
+                                <div class="bar"><div class="bar-fill" data-width="{{ skill.level }}"></div></div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{# ====================== EXPÉRIENCE ====================== #}
+{% if experiences %}
+<section>
+    <div class="shell shell-narrow">
+        <div class="sec-head reveal">
+            <div class="sec-marker"><span class="num">02</span> / 03 — historique</div>
+            <h2 class="sec-title" data-i18n="exp.title">Expérience <em>professionnelle</em></h2>
+        </div>
+
+        <div class="timeline">
+            {% for exp in experiences %}
+            <div class="tl-item reveal {% if exp.is_current %}current{% endif %}">
+                <div class="tl-head">
+                    <div>
+                        <div class="tl-role">{{ exp.position }}</div>
+                        <div class="tl-org">@ {{ exp.company }}</div>
+                    </div>
+                    <div class="tl-date">
+                        {{ exp.start_date|date:"M Y" }} → {% if exp.is_current %}<span class="now" data-i18n="exp.present">NOW</span>{% else %}{{ exp.end_date|date:"M Y" }}{% endif %}
+                    </div>
+                </div>
+                {% if exp.location %}
+                <div class="tl-loc"><i class="fas fa-map-marker-alt"></i> {{ exp.location }}</div>
+                {% endif %}
+                <p class="tl-desc">{{ exp.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{# ====================== FORMATION ====================== #}
+{% if educations %}
+<section>
+    <div class="shell shell-narrow">
+        <div class="sec-head reveal">
+            <div class="sec-marker"><span class="num">03</span> / 03 — formation</div>
+            <h2 class="sec-title" data-i18n="edu.title"><em>Formation</em> académique</h2>
+        </div>
+
+        <div class="timeline">
+            {% for edu in educations %}
+            <div class="tl-item reveal {% if edu.is_current %}current{% endif %}">
+                <div class="tl-head">
+                    <div>
+                        <div class="tl-role">{{ edu.degree }}</div>
+                        <div class="tl-org">@ {{ edu.school }}</div>
+                    </div>
+                    <div class="tl-date">
+                        {{ edu.start_date|date:"Y" }} → {% if edu.is_current %}<span class="now" data-i18n="exp.present">NOW</span>{% else %}{{ edu.end_date|date:"Y" }}{% endif %}
+                    </div>
+                </div>
+                {% if edu.location %}
+                <div class="tl-loc"><i class="fas fa-map-marker-alt"></i> {{ edu.location }}</div>
+                {% endif %}
+                {% if edu.description %}
+                <p class="tl-desc">{{ edu.description }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% endblock %}

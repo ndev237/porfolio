@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact — Ndawa Mohammed{% endblock %}
+{% block term_file %}contact.md{% endblock %}
+
+{% block content %}
+<section>
+    <div class="shell">
+
+        <div class="sec-head reveal">
+            <div class="sec-marker"><span class="num">01</span> — open channel</div>
+            <h2 class="sec-title" data-i18n="contact.title">Restons en <em>contact</em></h2>
+            <p class="sec-sub" data-i18n="contact.subtitle">
+                Pour une collaboration, une question technique ou simplement dire bonjour.
+            </p>
+        </div>
+
+        <div class="hero-grid" style="align-items:start">
+
+            {# ----------- Infos contact ----------- #}
+            <div style="display:flex;flex-direction:column;gap:1rem">
+                <a href="mailto:ecladorvynil507@gmail.com" class="card reveal" style="text-decoration:none">
+                    <div class="card-head">
+                        <span><span class="num">/</span> email</span>
+                        <span class="badge live">primary</span>
+                    </div>
+                    <div class="card-body" style="padding: 1.25rem 1.5rem">
+                        <div class="mono" style="font-size:var(--t-base); color: var(--phosphor)">ecladorvynil507@gmail.com</div>
+                        <div class="dim" style="font-size:var(--t-sm); margin-top:0.35rem">réponse sous 48&nbsp;h en général</div>
+                    </div>
+                </a>
+
+                <a href="tel:+237697579270" class="card reveal" style="text-decoration:none">
+                    <div class="card-head">
+                        <span><span class="num">/</span> phone</span>
+                        <span class="badge" data-i18n="contact.phone">tel</span>
+                    </div>
+                    <div class="card-body" style="padding: 1.25rem 1.5rem">
+                        <div class="mono" style="font-size:var(--t-base); color: var(--bone)">+237 697 579 270</div>
+                        <div class="dim mono" style="font-size:var(--t-xs); margin-top:0.35rem">+237 678 714 521</div>
+                    </div>
+                </a>
+
+                <div class="card reveal">
+                    <div class="card-head">
+                        <span><span class="num">/</span> location</span>
+                        <span class="badge" data-i18n="contact.location">loc</span>
+                    </div>
+                    <div class="card-body" style="padding: 1.25rem 1.5rem">
+                        <div style="color: var(--bone)">BP Cité — Carrefour Maquereau</div>
+                        <div class="dim" style="font-size:var(--t-sm); margin-top:0.25rem">Douala, Cameroun</div>
+                    </div>
+                </div>
+
+                <div class="card reveal" style="border-color:var(--phosphor-edge)">
+                    <div class="card-body" style="padding: 1.25rem 1.5rem; display:flex; align-items:center; gap:0.75rem">
+                        <span style="color:var(--phosphor); animation: blink 1.5s infinite">●</span>
+                        <span class="mono" style="color:var(--phosphor); font-size:var(--t-sm)">disponible pour de nouvelles missions</span>
+                    </div>
+                </div>
+
+                <div class="reveal" style="display:flex;gap:0.5rem;padding-top:0.5rem">
+                    <a href="https://github.com" target="_blank" rel="noopener" class="icon-btn" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener" class="icon-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:ecladorvynil507@gmail.com" class="icon-btn" title="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+
+            {# ----------- Formulaire ----------- #}
+            <div class="reveal">
+                <div class="card">
+                    <div class="card-head">
+                        <span><span class="num">$</span> ./send-message --to=ndawa</span>
+                        <span class="badge live">FORM</span>
+                    </div>
+                    <div class="card-body" style="padding: 2rem">
+                        <h3 class="card-title" style="margin-bottom:1.5rem" data-i18n="contact.form.title">// nouveau message</h3>
+
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+
+                            <div class="grid-2" style="gap:1rem; display:grid; grid-template-columns:1fr 1fr">
+                                <div class="form-field" style="margin-bottom:0">
+                                    <label class="form-label" data-i18n="contact.name">--name</label>
+                                    {{ form.name }}
+                                    {% if form.name.errors %}<p class="form-error">{{ form.name.errors.0 }}</p>{% endif %}
+                                </div>
+                                <div class="form-field" style="margin-bottom:0">
+                                    <label class="form-label" data-i18n="contact.email">--email</label>
+                                    {{ form.email }}
+                                    {% if form.email.errors %}<p class="form-error">{{ form.email.errors.0 }}</p>{% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-field" style="margin-top:1.25rem">
+                                <label class="form-label" data-i18n="contact.subject">--subject</label>
+                                {{ form.subject }}
+                                {% if form.subject.errors %}<p class="form-error">{{ form.subject.errors.0 }}</p>{% endif %}
+                            </div>
+
+                            <div class="form-field">
+                                <label class="form-label" data-i18n="contact.message">--message</label>
+                                {{ form.message }}
+                                {% if form.message.errors %}<p class="form-error">{{ form.message.errors.0 }}</p>{% endif %}
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding: 1rem">
+                                <span data-i18n="contact.send">send-message</span>
+                                <span class="arrow">→</span>
+                            </button>
+
+                            <p class="mono muted" style="font-size:var(--t-xs); text-align:center; margin-top:1rem">
+                                # ton message arrive directement dans ma boîte
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

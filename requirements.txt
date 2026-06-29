@@ -1,0 +1,18 @@
+django>=5.0,<6.0
+pillow
+anthropic
+
+# Serveur de production
+gunicorn>=22.0
+
+# Fichiers statiques en prod
+whitenoise>=6.7
+
+# Lecture des variables d'environnement (.env en dev)
+python-dotenv>=1.0
+
+# Parse DATABASE_URL en config Django (SQLite / Postgres)
+dj-database-url>=2.2
+
+# Driver PostgreSQL (utilisé en production)
+psycopg2-binary>=2.9

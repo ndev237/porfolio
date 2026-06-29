@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ project.title }} — Ndawa Mohammed{% endblock %}
+{% block term_file %}projects/{{ project.slug }}.md{% endblock %}
+
+{% block content %}
+<section>
+    <div class="shell shell-narrow">
+
+        <div class="reveal" style="margin-bottom: 2rem">
+            <a href="{% url 'projects' %}" class="mono dim" data-i18n="project.back" style="font-size:var(--t-sm)">
+                <span style="color:var(--phosphor)">←</span> cd ../projets
+            </a>
+        </div>
+
+        <div class="card reveal" style="margin-bottom:2rem">
+            <div class="card-head">
+                <span><span class="num">/</span> {{ project.slug }}.md</span>
+                <span class="badge {% if project.featured %}live{% endif %}">
+                    {% if project.featured %}FEATURED{% else %}CASE STUDY{% endif %}
+                </span>
+            </div>
+
+            <div class="card-cover" style="aspect-ratio: 21/9">
+                {% if project.image %}
+                <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                {% else %}
+                <span class="initials" style="font-size: clamp(4rem, 10vw, 8rem)">{{ project.title|slice:":2"|upper }}</span>
+                {% endif %}
+            </div>
+
+            <div class="card-body" style="padding: 2.5rem">
+                <div class="sec-marker" style="margin-bottom:1rem">
+                    <span class="num">01</span> — case study
+                </div>
+                <h1 class="hero-name" style="font-size: clamp(1.75rem, 4vw, 2.75rem); line-height: 1.1; margin-bottom: 0.75rem">
+                    {{ project.title }}
+                </h1>
+                {% if project.short_description %}
+                <p class="dim" style="font-size: var(--t-lg); margin-bottom: 1.5rem; max-width: 60ch">{{ project.short_description }}</p>
+                {% endif %}
+
+                <div class="tags" style="margin-bottom: 1.5rem">
+                    {% for tech in project.tech_list %}
+                    <span class="tag">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+
+                {% if project.github_url or project.live_url %}
+                <div style="display:flex; flex-wrap:wrap; gap: 0.75rem">
+                    {% if project.live_url %}
+                    <a href="{{ project.live_url }}" class="btn btn-primary" target="_blank" rel="noopener">
+                        <i class="fas fa-arrow-up-right-from-square" style="font-size:0.85em"></i>
+                        <span data-i18n="project.live">voir en ligne</span>
+                    </a>
+                    {% endif %}
+                    {% if project.github_url %}
+                    <a href="{{ project.github_url }}" class="btn btn-ghost" target="_blank" rel="noopener">
+                        <i class="fab fa-github" style="font-size:0.95em"></i>
+                        <span data-i18n="project.github">github</span>
+                    </a>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card reveal" style="margin-bottom:2rem">
+            <div class="card-head">
+                <span><span class="num">02</span> — description</span>
+                <span class="badge">README</span>
+            </div>
+            <div class="card-body" style="padding: 2rem 2.5rem; line-height:1.75; color: var(--bone-dim); font-size: var(--t-base)">
+                {{ project.description|linebreaks }}
+            </div>
+        </div>
+
+        <div class="card reveal" style="margin-bottom:2rem">
+            <div class="card-head">
+                <span><span class="num">03</span> — <span data-i18n="project.tech">technologies</span></span>
+                <span class="badge">stack.json</span>
+            </div>
+            <div class="card-body" style="padding:1.75rem 2.5rem">
+                <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));gap:0.5rem">
+                    {% for tech in project.tech_list %}
+                    <div class="mono" style="font-size:var(--t-sm); padding:0.65rem 0.85rem; border:1px solid var(--rule); background:var(--ink-2); display:flex; gap:0.5rem; align-items:center">
+                        <span style="color:var(--phosphor)">✓</span>
+                        <span>{{ tech }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="card reveal">
+            <div class="card-head">
+                <span><span class="num">04</span> — métadonnées</span>
+                <span class="badge">meta</span>
+            </div>
+            <div class="card-body" style="padding:1.5rem 2.5rem">
+                <div style="display:grid; grid-template-columns: max-content 1fr; gap: 0.75rem 2rem; font-family:var(--font-mono); font-size:var(--t-sm)">
+                    <span class="muted">date</span>
+                    <span>{{ project.created_at|date:"d F Y" }}</span>
+                    <span class="muted">slug</span>
+                    <span class="dim">{{ project.slug }}</span>
+                    {% if project.github_url %}
+                    <span class="muted">repo</span>
+                    <a href="{{ project.github_url }}" target="_blank" rel="noopener" style="color:var(--phosphor)">{{ project.github_url|truncatechars:50 }}</a>
+                    {% endif %}
+                    {% if project.live_url %}
+                    <span class="muted">live</span>
+                    <a href="{{ project.live_url }}" target="_blank" rel="noopener" style="color:var(--phosphor)">{{ project.live_url|truncatechars:50 }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

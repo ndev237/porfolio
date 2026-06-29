@@ -1,0 +1,144 @@
+[
+  {"model": "core.skill", "pk": 1,  "fields": {"name": "HTML",          "icon": "fab fa-html5",          "category": "frontend", "level": 95, "order": 1}},
+  {"model": "core.skill", "pk": 2,  "fields": {"name": "CSS",           "icon": "fab fa-css3-alt",       "category": "frontend", "level": 80, "order": 2}},
+  {"model": "core.skill", "pk": 3,  "fields": {"name": "JavaScript",    "icon": "fab fa-js",             "category": "frontend", "level": 45, "order": 3}},
+  {"model": "core.skill", "pk": 4,  "fields": {"name": "TailwindCSS",   "icon": "fas fa-wind",           "category": "frontend", "level": 75, "order": 4}},
+  {"model": "core.skill", "pk": 5,  "fields": {"name": "Python",        "icon": "fab fa-python",         "category": "backend",  "level": 75, "order": 1}},
+  {"model": "core.skill", "pk": 6,  "fields": {"name": "Django",        "icon": "fas fa-server",         "category": "backend",  "level": 75, "order": 2}},
+  {"model": "core.skill", "pk": 7,  "fields": {"name": "ODOO 17",       "icon": "fas fa-cogs",           "category": "backend",  "level": 90, "order": 3}},
+  {"model": "core.skill", "pk": 8,  "fields": {"name": "VB.NET",        "icon": "fas fa-desktop",        "category": "other",    "level": 85, "order": 1}},
+  {"model": "core.skill", "pk": 9,  "fields": {"name": "Tkinter",       "icon": "fas fa-window-restore", "category": "other",    "level": 75, "order": 2}},
+  {"model": "core.skill", "pk": 10, "fields": {"name": "GitHub",        "icon": "fab fa-github",         "category": "tools",    "level": 60, "order": 1}},
+
+  {"model": "core.experience", "pk": 1, "fields": {
+    "position":    "Développeur Python & ODOO",
+    "company":     "PANAFRICATECH SARL",
+    "location":    "Douala, Cameroun",
+    "start_date":  "2024-05-01",
+    "end_date":    null,
+    "is_current":  true,
+    "description": "Implémentation d'un module ODOO 17 de paie intégrant les règles salariales camerounaises. Configuration des routeurs Starlink et répéteurs wifi.",
+    "order": 1
+  }},
+  {"model": "core.experience", "pk": 2, "fields": {
+    "position":    "Développeur Web & Technicien Informatique",
+    "company":     "PERFORMANCE SERVICE SARL",
+    "location":    "Douala, Cameroun",
+    "start_date":  "2023-06-01",
+    "end_date":    "2024-05-01",
+    "is_current":  false,
+    "description": "Implémentation du site Web officiel de Performance Service. Installation et maintenance des équipements informatiques. Installation des antivirus et configuration des caméras ampoule.",
+    "order": 2
+  }},
+  {"model": "core.experience", "pk": 3, "fields": {
+    "position":    "Stagiaire Technicien Informatique",
+    "company":     "SOCEMCOOP-CA",
+    "location":    "Douala, Cameroun",
+    "start_date":  "2022-08-01",
+    "end_date":    "2022-09-01",
+    "is_current":  false,
+    "description": "Installation du système d'exploitation Windows 10 et maintenance des équipements informatiques. Implémentation d'une application desktop de gestion des clients du compte collecte journalière.",
+    "order": 3
+  }},
+
+  {"model": "core.education", "pk": 1, "fields": {
+    "degree":       "Licence Professionnelle en Génie Logiciel",
+    "school":       "IUEs / INSAM",
+    "location":     "Ndokoti, Douala",
+    "start_date":   "2025-09-01",
+    "end_date":     null,
+    "is_current":   true,
+    "description":  "Diplôme · session 2025-2026 — formation en cours.",
+    "order": 1
+  }},
+  {"model": "core.education", "pk": 2, "fields": {
+    "degree":       "BTS en Génie Logiciel",
+    "school":       "IUEs / INSAM",
+    "location":     "Ndokoti, Douala",
+    "start_date":   "2022-09-01",
+    "end_date":     "2023-06-01",
+    "is_current":   false,
+    "description":  "Diplôme · session 2022-2023.",
+    "order": 2
+  }},
+  {"model": "core.education", "pk": 3, "fields": {
+    "degree":       "Introduction à la méthode EBIOS Risk Manager",
+    "school":       "Club EBIOS — ANSSI",
+    "location":     "Paris (distanciel)",
+    "start_date":   "2026-05-28",
+    "end_date":     "2026-05-28",
+    "is_current":   false,
+    "description":  "Certification · MOOC de 3h sur l'analyse de risques cyber selon la méthode officielle EBIOS Risk Manager.",
+    "order": 3
+  }},
+  {"model": "core.education", "pk": 4, "fields": {
+    "degree":       "Développeur Odoo",
+    "school":       "Formation professionnelle",
+    "location":     "Douala, Cameroun",
+    "start_date":   "2024-05-01",
+    "end_date":     "2024-12-01",
+    "is_current":   false,
+    "description":  "Certification · conception et développement de modules ODOO 17 (modèles, vues XML, sécurité, règles métier).",
+    "order": 4
+  }},
+  {"model": "core.education", "pk": 5, "fields": {
+    "degree":       "Développeur Desktop Python (Tkinter)",
+    "school":       "Getmaster",
+    "location":     "Logpom, Douala",
+    "start_date":   "2024-09-01",
+    "end_date":     "2025-06-01",
+    "is_current":   false,
+    "description":  "Certification · session 2024-2025. Applications desktop multi-fenêtres, persistance SQLite, packaging.",
+    "order": 5
+  }},
+  {"model": "core.education", "pk": 6, "fields": {
+    "degree":       "Développeur Web Fullstack Python",
+    "school":       "Localhost Academy",
+    "location":     "Sité-SIC, Douala",
+    "start_date":   "2023-09-01",
+    "end_date":     "2024-06-01",
+    "is_current":   false,
+    "description":  "Certification · session 2023-2024. Django, ORM, templating, déploiement.",
+    "order": 6
+  }},
+
+  {"model": "core.project", "pk": 1, "fields": {
+    "title":             "Site Web Performance Service",
+    "slug":              "site-web-performance-service",
+    "description":       "Conception et implémentation du site web officiel de Performance Service SARL. Le site présente les services de l'entreprise, son équipe et permet aux clients de prendre contact directement en ligne.",
+    "short_description": "Site vitrine pour Performance Service SARL",
+    "image":             null,
+    "technologies":      "HTML,CSS,JavaScript,Django,Python",
+    "github_url":        "",
+    "live_url":          "",
+    "featured":          true,
+    "order":             1,
+    "created_at":        "2024-01-15T00:00:00Z"
+  }},
+  {"model": "core.project", "pk": 2, "fields": {
+    "title":             "Application Gestion Clients SOCEMCOOP",
+    "slug":              "application-gestion-clients-socemcoop",
+    "description":       "Application desktop de gestion des clients du compte collecte journalière pour SOCEMCOOP-CA. Développée avec Python et Tkinter, elle permet d'enregistrer, consulter et gérer les entrées quotidiennes des clients de manière efficace.",
+    "short_description": "Application desktop Python/Tkinter de gestion de clients",
+    "image":             null,
+    "technologies":      "Python,Tkinter,SQLite",
+    "github_url":        "",
+    "live_url":          "",
+    "featured":          true,
+    "order":             2,
+    "created_at":        "2022-09-01T00:00:00Z"
+  }},
+  {"model": "core.project", "pk": 3, "fields": {
+    "title":             "Module ODOO 17 Paie",
+    "slug":              "module-odoo-paie",
+    "description":       "Implémentation d'un module ODOO 17 complet pour la gestion de la paie des employés chez PANAFRICATECH SARL. Le module intègre les règles de calcul salariales camerounaises, la gestion des cotisations et la génération des bulletins de paie.",
+    "short_description": "Module ODOO 17 de gestion de la paie camerounaise",
+    "image":             null,
+    "technologies":      "Python,ODOO 17,XML,PostgreSQL",
+    "github_url":        "",
+    "live_url":          "",
+    "featured":          true,
+    "order":             3,
+    "created_at":        "2024-06-01T00:00:00Z"
+  }}
+]

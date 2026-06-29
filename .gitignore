@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.Python
+build/
+dist/
+
+# Environnements virtuels
+venv/
+.venv/
+env/
+ENV/
+
+# Variables d'environnement (jamais commiter de secrets)
+.env
+.env.local
+.env.*.local
+
+# Base SQLite locale
+db.sqlite3
+db.sqlite3-journal
+*.sqlite3
+
+# Fichiers uploadés en local
+media/
+
+# Fichiers collectés en production
+staticfiles/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

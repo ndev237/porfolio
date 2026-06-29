@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ndawa Mohammed — Développeur Python & ODOO{% endblock %}
+{% block term_file %}home.md{% endblock %}
+
+{% block content %}
+
+{# ====================== HERO ====================== #}
+<section class="hero">
+    <div class="shell">
+        <div class="hero-grid">
+
+            {# --- Colonne gauche --- #}
+            <div class="reveal">
+                <div class="prompt-line">
+                    <span class="ps">$</span>
+                    <span class="cmd">whoami</span>
+                </div>
+
+                <h1 class="hero-name">
+                    Ndawa
+                    <span class="last">// mohammed</span>
+                </h1>
+
+                <div class="hero-role">
+                    <span id="typing-text"
+                          data-typing-fr='["Développeur Python","Développeur ODOO 17","Développeur Web Django","Développeur Desktop"]'
+                          data-typing-en='["Python Developer","ODOO 17 Developer","Django Web Developer","Desktop Developer"]'></span><span class="cursor"></span>
+                </div>
+
+                <p class="hero-sub" data-i18n="hero.subtitle">
+                    Je conçois des applications web, des modules ODOO et des outils desktop
+                    avec une obsession pour la <em style="color:var(--bone);font-style:normal">qualité du code</em>
+                    et la <em style="color:var(--bone);font-style:normal">justesse des décisions techniques</em>.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="{% url 'projects' %}" class="btn btn-primary">
+                        ls ./projets <span class="arrow">→</span>
+                    </a>
+                    <a href="{% url 'contact' %}" class="btn btn-ghost">
+                        ./contact <span class="arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+            {# --- Colonne droite : identity card --- #}
+            <div class="reveal" style="transition-delay:.12s">
+                <div class="id-card">
+                    <div class="id-card-head">
+                        <span class="file">profile.json</span>
+                        <span class="status">[ ACTIVE ]</span>
+                    </div>
+                    <div class="id-card-body">
+                        <span class="id-key">// name</span>
+                        <div class="id-value">Ndawa Mohammed</div>
+
+                        <span class="id-key">// role</span>
+                        <div class="id-value mono">python + odoo + django</div>
+
+                        <span class="id-key">// based_in</span>
+                        <div class="id-value">
+                            <i class="fas fa-map-marker-alt" style="color:var(--phosphor); font-size:0.85em; margin-right:0.4em"></i>
+                            Douala, Cameroun
+                        </div>
+
+                        <span class="id-key">// status</span>
+                        <div class="id-value mono" style="color: var(--phosphor)">
+                            ● disponible
+                        </div>
+
+                        <div class="id-stats">
+                            <div>
+                                <div class="n">3+</div>
+                                <div class="l" data-i18n="hero.stat.exp">années</div>
+                            </div>
+                            <div>
+                                <div class="n">10+</div>
+                                <div class="l" data-i18n="hero.stat.tech">technos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{# ====================== FEATURED ====================== #}
+{% if featured_projects %}
+<section>
+    <div class="shell">
+        <div class="sec-head reveal">
+            <div class="sec-marker"><span class="num">01</span> / 04 — <span data-i18n="section.featured">sélection</span></div>
+            <h2 class="sec-title">Quelques <em>projets</em> représentatifs</h2>
+            <p class="sec-sub" data-i18n="section.featured.sub">
+                Une sélection courte. Le reste vit dans <code class="mono" style="color:var(--phosphor)">/projets</code>.
+            </p>
+        </div>
+
+        <div class="grid-3">
+            {% for project in featured_projects %}
+            <article class="card reveal" style="transition-delay:{{ forloop.counter0|add:1 }}00ms">
+                <div class="card-head">
+                    <span><span class="num">0{{ forloop.counter }}</span> · {{ project.created_at|date:"Y" }}</span>
+                    <span class="badge {% if project.live_url %}live{% endif %}">
+                        {% if project.live_url %}LIVE{% else %}CASE{% endif %}
+                    </span>
+                </div>
+                <div class="card-cover">
+                    {% if project.image %}
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                    {% else %}
+                    <span class="initials">{{ project.title|slice:":2"|upper }}</span>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{ project.title }}</h3>
+                    <p class="card-desc line-clamp-2">{{ project.short_description|default:project.description }}</p>
+                    <div class="tags">
+                        {% for tech in project.tech_list|slice:":4" %}
+                        <span class="tag">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-foot">
+                    <a href="{% url 'project_detail' project.slug %}">cat ./{{ project.slug|truncatechars:20 }} →</a>
+                    <span class="icons">
+                        {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>{% endif %}
+                        {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i></a>{% endif %}
+                    </span>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <div class="reveal" style="margin-top:2.5rem;text-align:center">
+            <a href="{% url 'projects' %}" class="btn btn-ghost">
+                ls -la ./projets <span class="arrow">→</span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{# ====================== SKILLS PREVIEW ====================== #}
+{% if skills %}
+<section>
+    <div class="shell">
+        <div class="sec-head reveal">
+            <div class="sec-marker"><span class="num">02</span> / 04 — <span data-i18n="section.skills">stack</span></div>
+            <h2 class="sec-title">Le <em>terrain de jeu</em> technique</h2>
+            <p class="sec-sub" data-i18n="section.skills.sub">
+                Les outils que j'utilise au quotidien, classés par usage réel.
+            </p>
+        </div>
+
+        <div class="grid-3">
+            {% regroup skills by category as skill_groups %}
+            {% for group in skill_groups %}
+            <div class="skill-cat reveal" style="transition-delay:{{ forloop.counter0|add:1 }}00ms">
+                <div class="skill-cat-head">
+                    <span>
+                        {% if group.grouper == 'frontend' %}// frontend
+                        {% elif group.grouper == 'backend' %}// backend
+                        {% elif group.grouper == 'devops' %}// devops
+                        {% elif group.grouper == 'tools' %}// tools
+                        {% else %}// other
+                        {% endif %}
+                    </span>
+                    <span class="count">{{ group.list|length }}</span>
+                </div>
+                <div class="skill-cat-body">
+                    {% for skill in group.list %}
+                    <div class="skill">
+                        <div class="skill-head">
+                            <span class="name"><i class="{{ skill.icon }}"></i>{{ skill.name }}</span>
+                            <span class="level">{{ skill.level }}%</span>
+                        </div>
+                        <div class="bar"><div class="bar-fill" data-width="{{ skill.level }}"></div></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="reveal" style="margin-top:2.5rem;text-align:center">
+            <a href="{% url 'about' %}" class="btn btn-ghost">
+                cat ./about.md <span class="arrow">→</span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{# ====================== CTA ====================== #}
+<section>
+    <div class="shell shell-narrow">
+        <div class="card reveal" style="padding: 3rem 2rem; text-align: center">
+            <div class="ascii-rule">── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ──</div>
+
+            <div class="sec-marker" style="justify-content:center;margin-bottom:1.25rem">
+                <span class="num">03</span> / 04 — collaboration
+            </div>
+
+            <h2 class="sec-title" style="font-size:clamp(1.5rem, 4vw, 2.5rem); margin-bottom:1rem">
+                Un projet, une <em>idée</em>, une opportunité&nbsp;?
+            </h2>
+            <p class="dim" style="max-width:48ch; margin: 0 auto 2rem">
+                J'ouvre ma boîte de réception avec curiosité. Décrivez votre besoin, je
+                vous réponds sous 48&nbsp;h.
+            </p>
+            <a href="{% url 'contact' %}" class="btn btn-primary">
+                ./envoyer-message <span class="arrow">→</span>
+            </a>
+
+            <div class="ascii-rule" style="margin-top:2.5rem">── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ──</div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

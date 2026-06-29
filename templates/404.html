@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page introuvable · Ndawa Mohammed</title>
+
+    <script>
+        (function () {
+            try { if (localStorage.getItem('theme') === 'light') document.documentElement.classList.add('light'); } catch (e) {}
+        })();
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="noise-bg"></div>
+
+<div class="notfound" style="position:relative;z-index:10">
+
+    <div class="prompt-line" style="margin-bottom:2rem">
+        <span class="ps">$</span>
+        <span class="cmd">cat /{{ request.path|cut:'/'|default:'unknown' }}</span>
+    </div>
+
+    <div class="code">404</div>
+
+    <div class="err">command not found: page</div>
+
+    <p class="dim" style="max-width:48ch; margin: 0 auto 2.5rem; font-size:var(--t-lg)">
+        La page demandée n'existe pas, a été déplacée<br>ou n'est plus accessible.
+    </p>
+
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:3rem">
+        <a href="/" class="btn btn-primary">cd ~ <span class="arrow">→</span></a>
+        <a href="/contact/" class="btn btn-ghost">./contact <span class="arrow">→</span></a>
+    </div>
+
+    <div class="ascii-rule" style="max-width:600px">── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ──</div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-top:1.5rem">
+        <a href="/" class="tag">accueil</a>
+        <a href="/about/" class="tag">à propos</a>
+        <a href="/projects/" class="tag">projets</a>
+        <a href="/contact/" class="tag">contact</a>
+    </div>
+
+    <div class="mono muted" style="margin-top:3rem; font-size:var(--t-xs)">
+        © 2025 Ndawa Mohammed
+    </div>
+</div>
+
+</body>
+</html>

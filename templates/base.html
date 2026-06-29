@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Ndawa Mohammed — Développeur Python & ODOO{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Portfolio de Ndawa Mohammed, développeur Python, Django et ODOO basé à Douala, Cameroun.{% endblock %}">
+    <meta name="author" content="Ndawa Mohammed">
+    <meta name="theme-color" content="#0a0a0a">
+
+    {# Anti-FOUC : applique le thème sauvegardé avant le rendu #}
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem('theme') === 'light') document.documentElement.classList.add('light');
+                if (localStorage.getItem('lang') === 'en') document.documentElement.lang = 'en';
+            } catch (e) {}
+        })();
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="noise-bg"></div>
+
+{# ========== Status bar ========== #}
+<div class="term-bar">
+    <div class="left">
+        <span class="dots"><span></span><span></span><span></span></span>
+    </div>
+    <div class="path">
+        <span class="muted">~/</span><span class="accent">ndawa-mohammed</span><span class="muted">/portfolio</span>
+        <span class="hide-mobile muted"> — {% block term_file %}index.md{% endblock %}</span>
+    </div>
+    <div class="right">
+        <span>utf-8</span>
+        <span>fr_FR</span>
+        <span style="color: var(--phosphor)">●</span>
+    </div>
+</div>
+
+{# ========== Navigation ========== #}
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="{% url 'home' %}" class="brand">
+            <span class="mark">NM</span>
+            <span class="name"><span class="at">$</span> ndawa<span class="at">@</span>portfolio</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="{% url 'home' %}"     class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"     data-i18n="nav.home">accueil</a>
+            <a href="{% url 'about' %}"    class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"    data-i18n="nav.about">à propos</a>
+            <a href="{% url 'projects' %}" class="nav-link {% if 'projects' in request.resolver_match.url_name|default:'' or request.resolver_match.url_name == 'project_detail' %}active{% endif %}" data-i18n="nav.projects">projets</a>
+            <a href="{% url 'contact' %}"  class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"  data-i18n="nav.contact">contact</a>
+        </div>
+
+        <div class="nav-actions">
+            {% if user.is_staff %}
+            <a href="/gestion/" class="icon-btn" title="Admin"><i class="fas fa-gauge-high"></i></a>
+            {% endif %}
+            <button class="icon-btn lang-btn" id="lang-toggle" aria-label="Changer la langue"><span class="lang-label">EN</span></button>
+            <button class="icon-btn" id="theme-toggle" aria-label="Changer le thème"><i class="fas fa-sun theme-icon"></i></button>
+            <button class="icon-btn only-mobile" id="mobile-toggle" aria-label="Menu"><i class="fas fa-bars"></i></button>
+        </div>
+    </div>
+</nav>
+
+{# ========== Menu mobile ========== #}
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <button class="mobile-close" id="mobile-close" aria-label="Fermer">[ ESC ] fermer</button>
+    <div class="nav-links">
+        <a href="{% url 'home' %}"     class="nav-link" data-i18n="nav.home">accueil</a>
+        <a href="{% url 'about' %}"    class="nav-link" data-i18n="nav.about">à propos</a>
+        <a href="{% url 'projects' %}" class="nav-link" data-i18n="nav.projects">projets</a>
+        <a href="{% url 'contact' %}"  class="nav-link" data-i18n="nav.contact">contact</a>
+    </div>
+</div>
+
+{# ========== Messages flash ========== #}
+{% if messages %}
+<div class="toasts" id="toasts">
+    {% for message in messages %}
+    <div class="toast {% if message.tags == 'error' %}error{% endif %}">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+{# ========== Footer ========== #}
+<footer class="footer">
+    <div class="shell">
+        <div class="footer-grid">
+            <div>
+                <h4>// signature</h4>
+                <p class="footer-bio">
+                    <strong>Ndawa Mohammed</strong> — Développeur Python &amp; ODOO basé à Douala, Cameroun.
+                    Disponible pour de nouvelles opportunités et collaborations.
+                </p>
+                <div class="socials" style="margin-top:1.25rem">
+                    <a href="mailto:ecladorvynil507@gmail.com" class="icon-btn" title="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="tel:+237697579270" class="icon-btn" title="Téléphone"><i class="fas fa-phone"></i></a>
+                    <a href="https://github.com" target="_blank" rel="noopener" class="icon-btn" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener" class="icon-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4>// navigation</h4>
+                <ul class="footer-list">
+                    <li><a href="{% url 'home' %}">accueil</a></li>
+                    <li><a href="{% url 'about' %}">à propos</a></li>
+                    <li><a href="{% url 'projects' %}">projets</a></li>
+                    <li><a href="{% url 'contact' %}">contact</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4>// contact</h4>
+                <ul class="footer-list">
+                    <li><a href="mailto:ecladorvynil507@gmail.com">ecladorvynil507@gmail.com</a></li>
+                    <li><a href="tel:+237697579270">+237 697 579 270</a></li>
+                    <li><span class="muted">Douala — Cameroun</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-meta">
+            <span>© 2025 Ndawa Mohammed — tous droits réservés.</span>
+            <span>build <span class="build">stable</span> · django · python</span>
+        </div>
+    </div>
+</footer>
+
+<script src="{% static 'js/main.js' %}"></script>
+{% block extra_scripts %}{% endblock %}
+
+</body>
+</html>

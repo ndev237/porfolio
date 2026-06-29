@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Projets — Ndawa Mohammed{% endblock %}
+{% block term_file %}projects/{% endblock %}
+
+{% block content %}
+<section>
+    <div class="shell">
+
+        <div class="sec-head reveal">
+            <div class="sec-marker"><span class="num">01</span> — ls -la</div>
+            <h2 class="sec-title" data-i18n="projects.title">Mes <em>projets</em></h2>
+            <p class="sec-sub" data-i18n="projects.subtitle">
+                Une sélection de réalisations. Filtrez par techno pour cibler.
+            </p>
+        </div>
+
+        {% if all_techs %}
+        <div class="filters reveal">
+            <button class="filter-btn active" data-filter="all" data-i18n="projects.filter.all">all</button>
+            {% for tech in all_techs %}
+            <button class="filter-btn" data-filter="{{ tech }}">{{ tech }}</button>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if projects %}
+        <div class="grid-3">
+            {% for project in projects %}
+            <article class="card project-card reveal" data-techs="{{ project.technologies }}" style="transition-delay:{% widthratio forloop.counter0 1 60 %}ms">
+                <div class="card-head">
+                    <span><span class="num">0{{ forloop.counter }}</span> · {{ project.created_at|date:"Y" }}</span>
+                    {% if project.featured %}
+                    <span class="badge live">FEATURED</span>
+                    {% else %}
+                    <span class="badge">CASE</span>
+                    {% endif %}
+                </div>
+                <div class="card-cover">
+                    {% if project.image %}
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                    {% else %}
+                    <span class="initials">{{ project.title|slice:":2"|upper }}</span>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{ project.title }}</h3>
+                    <p class="card-desc line-clamp-3">{{ project.short_description|default:project.description }}</p>
+                    <div class="tags">
+                        {% for tech in project.tech_list %}
+                        <span class="tag">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-foot">
+                    <a href="{% url 'project_detail' project.slug %}" data-i18n="projects.view">open ./{{ project.slug|truncatechars:18 }} →</a>
+                    <span class="icons">
+                        {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>{% endif %}
+                        {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" rel="noopener" title="Live"><i class="fas fa-arrow-up-right-from-square"></i></a>{% endif %}
+                    </span>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        {% else %}
+        <div class="card reveal" style="padding:4rem 2rem; text-align:center">
+            <div class="mono" style="color:var(--bone-mute); font-size:var(--t-sm); margin-bottom:1rem">$ ls ./projets</div>
+            <p class="mono" style="color:var(--crimson)">!! aucun projet trouvé</p>
+            <p class="dim" style="margin-top:0.5rem" data-i18n="projects.empty">
+                Ajoutez des projets depuis l'interface d'administration.
+            </p>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+{% endblock %}
