@@ -154,7 +154,10 @@ STORAGES = {
         'BACKEND': 'django.core.files.storage.FileSystemStorage',
     },
     'staticfiles': {
-        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+        # CompressedStaticFilesStorage = compression gzip/brotli sans manifeste
+        # strict. Évite le 500 "Missing staticfiles manifest entry" quand un
+        # {% static 'images/xxx.jpg' %} référence un fichier non commité.
+        'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage',
     },
 }
 
