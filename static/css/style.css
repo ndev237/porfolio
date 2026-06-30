@@ -481,6 +481,19 @@ section { padding: 5rem 0; }
     max-width: 56ch;
     margin-bottom: 2.5rem;
     line-height: 1.65;
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+}
+
+/* Justification appliquée aux paragraphes longs (bio, descriptions) */
+.card-desc,
+.tl-desc,
+.footer-bio,
+.sec-sub {
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
 }
 
 .hero-actions {
