@@ -9,7 +9,7 @@
     <div class="shell">
 
         <div class="sec-head reveal">
-            <div class="sec-marker"><span class="num">01</span> — open channel</div>
+
             <h2 class="sec-title" data-i18n="contact.title">Restons en <em>contact</em></h2>
             <p class="sec-sub" data-i18n="contact.subtitle">
                 Pour une collaboration, une question technique ou simplement dire bonjour.
@@ -22,7 +22,7 @@
             <div style="display:flex;flex-direction:column;gap:1rem">
                 <a href="mailto:ecladorvynil507@gmail.com" class="card reveal" style="text-decoration:none">
                     <div class="card-head">
-                        <span><span class="num">/</span> email</span>
+                        <span><span class="num"></span> email</span>
                         <span class="badge live">primary</span>
                     </div>
                     <div class="card-body" style="padding: 1.25rem 1.5rem">
@@ -33,7 +33,7 @@
 
                 <a href="tel:+237697579270" class="card reveal" style="text-decoration:none">
                     <div class="card-head">
-                        <span><span class="num">/</span> phone</span>
+                        <span><span class="num"></span> phone</span>
                         <span class="badge" data-i18n="contact.phone">tel</span>
                     </div>
                     <div class="card-body" style="padding: 1.25rem 1.5rem">
@@ -44,7 +44,7 @@
 
                 <div class="card reveal">
                     <div class="card-head">
-                        <span><span class="num">/</span> location</span>
+                        <span><span class="num"></span> location</span>
                         <span class="badge" data-i18n="contact.location">loc</span>
                     </div>
                     <div class="card-body" style="padding: 1.25rem 1.5rem">
@@ -71,36 +71,36 @@
             <div class="reveal">
                 <div class="card">
                     <div class="card-head">
-                        <span><span class="num">$</span> ./send-message --to=ndawa</span>
+
                         <span class="badge live">FORM</span>
                     </div>
                     <div class="card-body" style="padding: 2rem">
-                        <h3 class="card-title" style="margin-bottom:1.5rem" data-i18n="contact.form.title">// nouveau message</h3>
+                        <h3 class="card-title" style="margin-bottom:1.5rem" data-i18n="contact.form.title">nouveau message</h3>
 
                         <form method="post" novalidate>
                             {% csrf_token %}
 
                             <div class="grid-2" style="gap:1rem; display:grid; grid-template-columns:1fr 1fr">
                                 <div class="form-field" style="margin-bottom:0">
-                                    <label class="form-label" data-i18n="contact.name">--name</label>
+                                    <label class="form-label" data-i18n="contact.name">name</label>
                                     {{ form.name }}
                                     {% if form.name.errors %}<p class="form-error">{{ form.name.errors.0 }}</p>{% endif %}
                                 </div>
                                 <div class="form-field" style="margin-bottom:0">
-                                    <label class="form-label" data-i18n="contact.email">--email</label>
+                                    <label class="form-label" data-i18n="contact.email">email</label>
                                     {{ form.email }}
                                     {% if form.email.errors %}<p class="form-error">{{ form.email.errors.0 }}</p>{% endif %}
                                 </div>
                             </div>
 
                             <div class="form-field" style="margin-top:1.25rem">
-                                <label class="form-label" data-i18n="contact.subject">--subject</label>
+                                <label class="form-label" data-i18n="contact.subject">subject</label>
                                 {{ form.subject }}
                                 {% if form.subject.errors %}<p class="form-error">{{ form.subject.errors.0 }}</p>{% endif %}
                             </div>
 
                             <div class="form-field">
-                                <label class="form-label" data-i18n="contact.message">--message</label>
+                                <label class="form-label" data-i18n="contact.message">message</label>
                                 {{ form.message }}
                                 {% if form.message.errors %}<p class="form-error">{{ form.message.errors.0 }}</p>{% endif %}
                             </div>
@@ -110,9 +110,6 @@
                                 <span class="arrow">→</span>
                             </button>
 
-                            <p class="mono muted" style="font-size:var(--t-xs); text-align:center; margin-top:1rem">
-                                # ton message arrive directement dans ma boîte
-                            </p>
                         </form>
                     </div>
                 </div>

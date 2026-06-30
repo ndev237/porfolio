@@ -10,13 +10,13 @@
 
         <div class="reveal" style="margin-bottom: 2rem">
             <a href="{% url 'projects' %}" class="mono dim" data-i18n="project.back" style="font-size:var(--t-sm)">
-                <span style="color:var(--phosphor)">←</span> cd ../projets
+                <span style="color:var(--phosphor)">←</span> projets
             </a>
         </div>
 
         <div class="card reveal" style="margin-bottom:2rem">
             <div class="card-head">
-                <span><span class="num">/</span> {{ project.slug }}.md</span>
+                <span><span class="num"></span> {{ project.slug }}</span>
                 <span class="badge {% if project.featured %}live{% endif %}">
                     {% if project.featured %}FEATURED{% else %}CASE STUDY{% endif %}
                 </span>
@@ -32,7 +32,7 @@
 
             <div class="card-body" style="padding: 2.5rem">
                 <div class="sec-marker" style="margin-bottom:1rem">
-                    <span class="num">01</span> — case study
+                    <span class="num"></span>  case study
                 </div>
                 <h1 class="hero-name" style="font-size: clamp(1.75rem, 4vw, 2.75rem); line-height: 1.1; margin-bottom: 0.75rem">
                     {{ project.title }}
@@ -68,7 +68,7 @@
 
         <div class="card reveal" style="margin-bottom:2rem">
             <div class="card-head">
-                <span><span class="num">02</span> — description</span>
+                <span><span class="num"></span> description</span>
                 <span class="badge">README</span>
             </div>
             <div class="card-body" style="padding: 2rem 2.5rem; line-height:1.75; color: var(--bone-dim); font-size: var(--t-base)">
@@ -78,7 +78,7 @@
 
         <div class="card reveal" style="margin-bottom:2rem">
             <div class="card-head">
-                <span><span class="num">03</span> — <span data-i18n="project.tech">technologies</span></span>
+                <span><span class="num"></span> <span data-i18n="project.tech">technologies</span></span>
                 <span class="badge">stack.json</span>
             </div>
             <div class="card-body" style="padding:1.75rem 2.5rem">
@@ -95,7 +95,7 @@
 
         <div class="card reveal">
             <div class="card-head">
-                <span><span class="num">04</span> — métadonnées</span>
+                <span><span class="num"></span> métadonnées</span>
                 <span class="badge">meta</span>
             </div>
             <div class="card-body" style="padding:1.5rem 2.5rem">

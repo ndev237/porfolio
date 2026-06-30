@@ -1,0 +1,41 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | NM // Dashboard{% endblock %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    {# Favicon NM identique au front #}
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2300ff95'/%3E%3Ctext x='32' y='45' font-family='ui-monospace,Menlo,Consolas,monospace' font-size='30' font-weight='800' text-anchor='middle' fill='%230a0a0a' letter-spacing='-1'%3ENM%3C/text%3E%3C/svg%3E">
+
+    {# Police monospace + sans cohérentes avec le portfolio #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Geist:wght@300;400;500;600;700;800&display=swap">
+
+    {# Overrides Terminal Editorial #}
+    <link rel="stylesheet" href="{% static 'admin/css/term_admin.css' %}">
+{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name">
+        <a href="{% url 'admin:index' %}">
+            <span class="nm-mark">NM</span>
+            <span class="nm-brand-text">
+                <span class="nm-brand-ps">$</span> ndawa<span class="nm-brand-at">@</span>portfolio
+                <span class="nm-brand-path"> ~ /dashboard</span>
+            </span>
+        </a>
+    </h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block footer %}
+    <div id="footer">
+        <div class="nm-footer-line">
+            <span class="nm-mono dim">// build stable · django · python · ndawa-mohammed</span>
+            <span class="nm-mono dim">© 2025 Ndawa Mohammed</span>
+        </div>
+    </div>
+{% endblock %}

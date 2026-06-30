@@ -13,10 +13,6 @@
 
             {# --- Colonne gauche --- #}
             <div class="reveal">
-                <div class="prompt-line">
-                    <span class="ps">$</span>
-                    <span class="cmd">whoami</span>
-                </div>
 
                 <h1 class="hero-name">
                     Ndawa
@@ -37,10 +33,10 @@
 
                 <div class="hero-actions">
                     <a href="{% url 'projects' %}" class="btn btn-primary">
-                        ls ./projets <span class="arrow">→</span>
+                        projets <span class="arrow">→</span>
                     </a>
                     <a href="{% url 'contact' %}" class="btn btn-ghost">
-                        ./contact <span class="arrow">→</span>
+                        contact <span class="arrow">→</span>
                     </a>
                 </div>
             </div>
@@ -49,9 +45,22 @@
             <div class="reveal" style="transition-delay:.12s">
                 <div class="id-card">
                     <div class="id-card-head">
-                        <span class="file">profile.json</span>
+                        <span class="file">profile</span>
                         <span class="status">[ ACTIVE ]</span>
                     </div>
+
+                    {% comment %}Bloc photo : remplace static/images/profile.jpg par ta vraie photo. Si le fichier n'existe pas, on affiche un placeholder propre.{% endcomment %}
+                    <div class="id-photo">
+                        <img src="{% static 'images/profile.jpg' %}"
+                             alt="Ndawa Mohammed"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="id-photo-empty" style="display:none">
+                            <i class="fas fa-user"></i>
+                            <div class="mono" style="font-size:var(--t-xs); margin-top:0.5rem">// photo</div>
+                            <div class="mono dim" style="font-size:var(--t-xs); margin-top:0.25rem">profile.jpg</div>
+                        </div>
+                    </div>
+
                     <div class="id-card-body">
                         <span class="id-key">// name</span>
                         <div class="id-value">Ndawa Mohammed</div>
@@ -93,10 +102,10 @@
 <section>
     <div class="shell">
         <div class="sec-head reveal">
-            <div class="sec-marker"><span class="num">01</span> / 04 — <span data-i18n="section.featured">sélection</span></div>
+
             <h2 class="sec-title">Quelques <em>projets</em> représentatifs</h2>
             <p class="sec-sub" data-i18n="section.featured.sub">
-                Une sélection courte. Le reste vit dans <code class="mono" style="color:var(--phosphor)">/projets</code>.
+                Une sélection courte. Le reste vit dans <code class="mono" style="color:var(--phosphor)">projets</code>.
             </p>
         </div>
 
@@ -126,7 +135,7 @@
                     </div>
                 </div>
                 <div class="card-foot">
-                    <a href="{% url 'project_detail' project.slug %}">cat ./{{ project.slug|truncatechars:20 }} →</a>
+                    <a href="{% url 'project_detail' project.slug %}">Detail {{ project.slug|truncatechars:20 }} →</a>
                     <span class="icons">
                         {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>{% endif %}
                         {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i></a>{% endif %}
@@ -138,7 +147,7 @@
 
         <div class="reveal" style="margin-top:2.5rem;text-align:center">
             <a href="{% url 'projects' %}" class="btn btn-ghost">
-                ls -la ./projets <span class="arrow">→</span>
+                Projets <span class="arrow">→</span>
             </a>
         </div>
     </div>
@@ -150,7 +159,7 @@
 <section>
     <div class="shell">
         <div class="sec-head reveal">
-            <div class="sec-marker"><span class="num">02</span> / 04 — <span data-i18n="section.skills">stack</span></div>
+            <div class="sec-marker"><span class="num"></span> <span data-i18n="section.skills">stack</span></div>
             <h2 class="sec-title">Le <em>terrain de jeu</em> technique</h2>
             <p class="sec-sub" data-i18n="section.skills.sub">
                 Les outils que j'utilise au quotidien, classés par usage réel.
@@ -189,7 +198,7 @@
 
         <div class="reveal" style="margin-top:2.5rem;text-align:center">
             <a href="{% url 'about' %}" class="btn btn-ghost">
-                cat ./about.md <span class="arrow">→</span>
+                A propos <span class="arrow">→</span>
             </a>
         </div>
     </div>
@@ -200,10 +209,10 @@
 <section>
     <div class="shell shell-narrow">
         <div class="card reveal" style="padding: 3rem 2rem; text-align: center">
-            <div class="ascii-rule">── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ──</div>
+
 
             <div class="sec-marker" style="justify-content:center;margin-bottom:1.25rem">
-                <span class="num">03</span> / 04 — collaboration
+                <span class="num"></span> /collaboration
             </div>
 
             <h2 class="sec-title" style="font-size:clamp(1.5rem, 4vw, 2.5rem); margin-bottom:1rem">
@@ -216,8 +225,6 @@
             <a href="{% url 'contact' %}" class="btn btn-primary">
                 ./envoyer-message <span class="arrow">→</span>
             </a>
-
-            <div class="ascii-rule" style="margin-top:2.5rem">── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ──</div>
         </div>
     </div>
 </section>

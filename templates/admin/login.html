@@ -1,0 +1,91 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}{{ block.super }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }} login nm-login{% endblock %}
+
+{% block usertools %}{% endblock %}
+
+{% block nav-breadcrumbs %}{% endblock %}
+
+{% block content_title %}{% endblock %}
+
+{% block branding %}{% endblock %}
+
+{% block content %}
+<div class="nm-login-shell">
+
+    <div class="nm-login-prompt">
+        <span class="nm-ps">$</span> ssh ndawa@dashboard
+    </div>
+
+    <div class="nm-login-card">
+        <div class="nm-login-head">
+            <span class="dots-row"><span></span><span></span><span></span></span>
+            <span class="title">auth.sh — bash</span>
+            <span class="status">[ LOCKED ]</span>
+        </div>
+
+        <div class="nm-login-body">
+            <div class="nm-login-brand">
+                <span class="nm-mark big">NM</span>
+                <div>
+                    <div class="t">Ndawa Mohammed</div>
+                    <div class="s">// administration</div>
+                </div>
+            </div>
+
+            {% if form.errors and not form.non_field_errors %}
+            <p class="nm-login-error">
+                !! veuillez corriger {{ form.errors|length|pluralize:"l'erreur,les erreurs" }} ci-dessous.
+            </p>
+            {% endif %}
+
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <p class="nm-login-error">!! {{ error }}</p>
+                {% endfor %}
+            {% endif %}
+
+            <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+
+                <div class="nm-form-field">
+                    <label for="id_username">&gt; --username</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}<p class="nm-form-err">{{ form.username.errors|join:", " }}</p>{% endif %}
+                </div>
+
+                <div class="nm-form-field">
+                    <label for="id_password">&gt; --password</label>
+                    {{ form.password }}
+                    <input type="hidden" name="next" value="{{ next }}">
+                    {% if form.password.errors %}<p class="nm-form-err">{{ form.password.errors|join:", " }}</p>{% endif %}
+                </div>
+
+                {% url 'admin_password_reset' as password_reset_url %}
+                {% if password_reset_url %}
+                <div class="nm-login-forgot">
+                    <a href="{{ password_reset_url }}">// mot de passe oublié&nbsp;?</a>
+                </div>
+                {% endif %}
+
+                <div class="submit-row nm-login-submit">
+                    <button type="submit" class="nm-btn-primary">
+                        ./connect <span class="arrow">→</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="nm-login-foot">
+            <span>auth · session-only</span>
+            <span class="ok">● ready</span>
+        </div>
+    </div>
+
+    <div class="nm-login-tip">
+        # accès réservé. retour au site → <a href="/">cd ~/</a>
+    </div>
+</div>
+{% endblock %}
