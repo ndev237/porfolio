@@ -5,9 +5,10 @@
 {% block term_file %}about.md{% endblock %}
 
 {% block content %}
-<section>
-    <div class="shell">
 
+{# ==================== HEADER ==================== #}
+<section style="padding-bottom:2rem">
+    <div class="shell">
         <div class="sec-head reveal">
             <div class="sec-marker"><span class="num"></span>  biographie</div>
             <h2 class="sec-title">À propos de <em>moi</em></h2>
@@ -15,12 +16,17 @@
                 Développeur Python &amp; ODOO basé à Douala, Cameroun.
             </p>
         </div>
+    </div>
+</section>
 
+{# ==================== TOP : identity (gauche) + profile avec photo (droite) ==================== #}
+<section style="padding-top:0;padding-bottom:3rem">
+    <div class="shell">
         <div class="hero-grid" style="align-items:start">
 
-            {# -------- Identity card (sticky) -------- #}
+            {# ----- Identity card ----- #}
             <div class="reveal">
-                <div class="id-card" style="position: sticky; top: 110px">
+                <div class="id-card">
                     <div class="id-card-head">
                         <span class="file">identity</span>
                         <span class="status">[ READ ]</span>
@@ -77,14 +83,26 @@
                 </div>
             </div>
 
-            {# -------- Bio + skills -------- #}
-            <div style="display:flex;flex-direction:column;gap:2rem">
-
-                <div class="card reveal">
+            {# ----- Profile card : photo + texte ----- #}
+            <div class="reveal" style="transition-delay:.08s">
+                <div class="card" style="overflow:hidden">
                     <div class="card-head">
                         <span><span class="num">/</span> profil</span>
                         <span class="badge">README</span>
                     </div>
+
+                    {# Photo : remplace static/images/profile.jpg ; fallback placeholder #}
+                    <div class="id-photo" style="aspect-ratio: 4 / 3">
+                        <img src="{% static 'images/profile.jpg' %}"
+                             alt="Ndawa Mohammed"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="id-photo-empty" style="display:none">
+                            <i class="fas fa-user"></i>
+                            <div class="mono" style="font-size:var(--t-xs); margin-top:0.5rem">// photo</div>
+                            <div class="mono dim" style="font-size:var(--t-xs); margin-top:0.25rem">profile.jpg</div>
+                        </div>
+                    </div>
+
                     <div class="card-body">
                         <h3 class="card-title">profil</h3>
                         <p class="card-desc" data-i18n="about.bio" style="color:var(--bone-dim); line-height:1.75; font-size:var(--t-base)">
@@ -95,111 +113,121 @@
                         </p>
                     </div>
                 </div>
-
-                {% if skills %}
-                <div class="card reveal">
-                    <div class="card-head">
-                        <span><span class="num">/</span> stack.tech</span>
-                        <span class="badge">{{ skills|length }} items</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title" style="margin-bottom:1.5rem" data-i18n="skills.title">compétences techniques</h3>
-
-                        {% regroup skills by category as skill_groups %}
-                        {% for group in skill_groups %}
-                        <div style="margin-bottom:2rem">
-                            <div class="skill-cat-head" style="border-bottom:1px dashed var(--rule); margin-bottom:0.5rem; padding-left:0; padding-right:0">
-                                <span>
-                                    {% if group.grouper == 'frontend' %}# frontend
-                                    {% elif group.grouper == 'backend' %}# backend
-                                    {% elif group.grouper == 'devops' %}# devops
-                                    {% elif group.grouper == 'tools' %}# tools
-                                    {% else %}# other
-                                    {% endif %}
-                                </span>
-                                <span class="count">{{ group.list|length }}</span>
-                            </div>
-                            {% for skill in group.list %}
-                            <div class="skill">
-                                <div class="skill-head">
-                                    <span class="name"><i class="{{ skill.icon }}"></i>{{ skill.name }}</span>
-                                    <span class="level">{{ skill.level }}%</span>
-                                </div>
-                                <div class="bar"><div class="bar-fill" data-width="{{ skill.level }}"></div></div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                {% endif %}
-
             </div>
+
         </div>
     </div>
 </section>
 
-{# ====================== EXPÉRIENCE ====================== #}
-{% if experiences %}
-<section>
-    <div class="shell shell-narrow">
-        <div class="sec-head reveal">
-            <div class="sec-marker"><span class="num"></span>historique</div>
-            <h2 class="sec-title" data-i18n="exp.title">Expérience <em>professionnelle</em></h2>
-        </div>
-
-        <div class="timeline">
-            {% for exp in experiences %}
-            <div class="tl-item reveal {% if exp.is_current %}current{% endif %}">
-                <div class="tl-head">
-                    <div>
-                        <div class="tl-role">{{ exp.position }}</div>
-                        <div class="tl-org">@ {{ exp.company }}</div>
-                    </div>
-                    <div class="tl-date">
-                        {{ exp.start_date|date:"M Y" }} → {% if exp.is_current %}<span class="now" data-i18n="exp.present">NOW</span>{% else %}{{ exp.end_date|date:"M Y" }}{% endif %}
-                    </div>
-                </div>
-                {% if exp.location %}
-                <div class="tl-loc"><i class="fas fa-map-marker-alt"></i> {{ exp.location }}</div>
-                {% endif %}
-                <p class="tl-desc">{{ exp.description }}</p>
+{# ==================== MIDDLE : Technical Skills (pleine largeur) ==================== #}
+{% if skills %}
+<section style="padding-top:0;padding-bottom:3rem">
+    <div class="shell">
+        <div class="card reveal">
+            <div class="card-head">
+                <span><span class="num">/</span> stack.tech</span>
+                <span class="badge">{{ skills|length }} items</span>
             </div>
-            {% endfor %}
+            <div class="card-body" style="padding:1.75rem 2rem">
+                <h3 class="card-title" style="margin-bottom:1.5rem" data-i18n="skills.title">compétences techniques</h3>
+
+                <div class="skills-table">
+                    {% regroup skills by category as skill_groups %}
+                    {% for group in skill_groups %}
+                    <div class="skills-row">
+                        <div class="skills-row-cat">
+                            {% if group.grouper == 'frontend' %}# frontend
+                            {% elif group.grouper == 'backend' %}# backend
+                            {% elif group.grouper == 'devops' %}# devops
+                            {% elif group.grouper == 'tools' %}# tools
+                            {% else %}# other
+                            {% endif %}
+                            <span class="skills-row-count">[{{ group.list|length }}]</span>
+                        </div>
+                        <div class="skills-row-list">
+                            {% for skill in group.list %}
+                            <span class="skill-pill">
+                                <i class="{{ skill.icon }}"></i>
+                                <span class="skill-pill-name">{{ skill.name }}</span>
+                                <span class="skill-pill-level">{{ skill.level }}%</span>
+                            </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 </section>
 {% endif %}
 
-{# ====================== FORMATION ====================== #}
-{% if educations %}
-<section>
-    <div class="shell shell-narrow">
-        <div class="sec-head reveal">
-            <div class="sec-marker"><span class="num"></span> formation</div>
-            <h2 class="sec-title" data-i18n="edu.title"><em>Formation</em> académique</h2>
-        </div>
+{# ==================== BOTTOM : Experience + Education côte à côte ==================== #}
+{% if experiences or educations %}
+<section style="padding-top:0">
+    <div class="shell">
+        <div class="about-bottom-grid">
 
-        <div class="timeline">
-            {% for edu in educations %}
-            <div class="tl-item reveal {% if edu.is_current %}current{% endif %}">
-                <div class="tl-head">
-                    <div>
-                        <div class="tl-role">{{ edu.degree }}</div>
-                        <div class="tl-org">@ {{ edu.school }}</div>
-                    </div>
-                    <div class="tl-date">
-                        {{ edu.start_date|date:"Y" }} → {% if edu.is_current %}<span class="now" data-i18n="exp.present">NOW</span>{% else %}{{ edu.end_date|date:"Y" }}{% endif %}
-                    </div>
+            {% if experiences %}
+            <div class="reveal">
+                <div class="sec-head" style="margin-bottom:1.5rem">
+                    <div class="sec-marker"><span class="num"></span>historique</div>
+                    <h2 class="sec-title" data-i18n="exp.title" style="font-size:clamp(1.4rem, 2.5vw, 1.85rem)">Work <em>Experience</em></h2>
                 </div>
-                {% if edu.location %}
-                <div class="tl-loc"><i class="fas fa-map-marker-alt"></i> {{ edu.location }}</div>
-                {% endif %}
-                {% if edu.description %}
-                <p class="tl-desc">{{ edu.description }}</p>
-                {% endif %}
+
+                <div class="timeline">
+                    {% for exp in experiences %}
+                    <div class="tl-item reveal {% if exp.is_current %}current{% endif %}">
+                        <div class="tl-head">
+                            <div style="min-width:0;flex:1">
+                                <div class="tl-role">{{ exp.position }}</div>
+                                <div class="tl-org">@ {{ exp.company }}</div>
+                            </div>
+                            <div class="tl-date">
+                                {{ exp.start_date|date:"M Y" }} → {% if exp.is_current %}<span class="now" data-i18n="exp.present">NOW</span>{% else %}{{ exp.end_date|date:"M Y" }}{% endif %}
+                            </div>
+                        </div>
+                        {% if exp.location %}
+                        <div class="tl-loc"><i class="fas fa-map-marker-alt"></i> {{ exp.location }}</div>
+                        {% endif %}
+                        <p class="tl-desc">{{ exp.description }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
-            {% endfor %}
+            {% endif %}
+
+            {% if educations %}
+            <div class="reveal" style="transition-delay:.08s">
+                <div class="sec-head" style="margin-bottom:1.5rem">
+                    <div class="sec-marker"><span class="num"></span> formation</div>
+                    <h2 class="sec-title" data-i18n="edu.title" style="font-size:clamp(1.4rem, 2.5vw, 1.85rem)"><em>Education</em></h2>
+                </div>
+
+                <div class="timeline">
+                    {% for edu in educations %}
+                    <div class="tl-item reveal {% if edu.is_current %}current{% endif %}">
+                        <div class="tl-head">
+                            <div style="min-width:0;flex:1">
+                                <div class="tl-role">{{ edu.degree }}</div>
+                                <div class="tl-org">@ {{ edu.school }}</div>
+                            </div>
+                            <div class="tl-date">
+                                {{ edu.start_date|date:"Y" }} → {% if edu.is_current %}<span class="now" data-i18n="exp.present">NOW</span>{% else %}{{ edu.end_date|date:"Y" }}{% endif %}
+                            </div>
+                        </div>
+                        {% if edu.location %}
+                        <div class="tl-loc"><i class="fas fa-map-marker-alt"></i> {{ edu.location }}</div>
+                        {% endif %}
+                        {% if edu.description %}
+                        <p class="tl-desc">{{ edu.description }}</p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
         </div>
     </div>
 </section>

@@ -813,6 +813,172 @@ section { padding: 5rem 0; }
     transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Page about — bas en 2 colonnes (work | education) */
+.about-bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+}
+@media (min-width: 900px) {
+    .about-bottom-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+    }
+}
+/* Dans la 2-col grid, on resserre la timeline pour qu'elle respire dans une colonne plus étroite */
+.about-bottom-grid .tl-item { padding-bottom: 1.75rem; }
+.about-bottom-grid .tl-head { gap: 0.4rem 0.85rem; }
+.about-bottom-grid .tl-role { font-size: var(--t-base); }
+.about-bottom-grid .tl-date { font-size: 0.65rem; }
+.about-bottom-grid .tl-desc { font-size: 0.8rem; }
+
+/* Page about — stack.tech façon tableau horizontal (catégorie | skills inline) */
+.skills-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.skills-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px dashed var(--rule);
+    align-items: baseline;
+}
+.skills-row:first-child { padding-top: 0.25rem; }
+.skills-row:last-child { border-bottom: none; padding-bottom: 0.25rem; }
+
+@media (min-width: 640px) {
+    .skills-row {
+        grid-template-columns: 140px 1fr;
+        gap: 1.5rem;
+        padding: 1.1rem 0;
+    }
+}
+
+.skills-row-cat {
+    font-family: var(--font-mono);
+    color: var(--phosphor);
+    font-size: var(--t-sm);
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+}
+
+.skills-row-count {
+    color: var(--bone-mute);
+    font-size: var(--t-xs);
+    font-weight: 400;
+}
+
+.skills-row-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.skill-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: var(--t-sm);
+    color: var(--bone);
+    padding: 5px 11px;
+    border: 1px solid var(--rule);
+    background: var(--ink-2);
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+    white-space: nowrap;
+}
+.skill-pill i {
+    color: var(--phosphor);
+    font-size: 0.95em;
+}
+.skill-pill-name { color: inherit; }
+.skill-pill-level {
+    color: var(--bone-mute);
+    font-size: 0.78em;
+    padding-left: 0.5rem;
+    margin-left: 0.1rem;
+    border-left: 1px solid var(--rule);
+    letter-spacing: 0.02em;
+}
+.skill-pill:hover {
+    border-color: var(--phosphor);
+    color: var(--phosphor);
+    background: rgba(0, 255, 149, 0.06);
+}
+.skill-pill:hover .skill-pill-level {
+    color: var(--bone);
+    border-left-color: var(--phosphor-edge);
+}
+
+/* Grille compacte de skills (about/home — à l'intérieur d'une catégorie) */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));   /* mobile : 2 cols */
+    gap: 0.85rem 1rem;
+}
+@media (min-width: 520px) {
+    .skills-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem 1.25rem; }
+}
+@media (min-width: 900px) {
+    .skills-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+.skill-compact {
+    padding: 0;
+    min-width: 0;
+}
+
+.skill-compact-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.4rem;
+    margin-bottom: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.2;
+    min-width: 0;
+}
+
+.skill-compact-name {
+    color: var(--bone);
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.skill-compact-name i {
+    color: var(--phosphor);
+    margin-right: 0.35em;
+    font-size: 0.95em;
+}
+
+.skill-compact-level {
+    color: var(--bone-mute);
+    font-size: 0.68rem;
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+}
+
+.skill-compact .bar { height: 3px; }
+
+@media (min-width: 520px) {
+    .skill-compact-row { font-size: var(--t-sm); }
+    .skill-compact-level { font-size: var(--t-xs); }
+    .skill-compact .bar { height: 4px; }
+}
+
 /* Grille catégories de skills */
 .skill-cat {
     border: 1px solid var(--rule);
